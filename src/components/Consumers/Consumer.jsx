@@ -18,7 +18,7 @@ const Consumer = ({consumer, id}) => {
                 message: `${consumer.label} - High Consumption!`
             });
         }
-        if (consumer.value < CONSUMER_THRESHOLD && alreadyNotified) {
+        if (consumer.value <= CONSUMER_THRESHOLD && alreadyNotified) {
             removeNotification(id);
         }
     }, [consumer, id, notifications, addNotification, removeNotification]);

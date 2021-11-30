@@ -18,7 +18,7 @@ const Battery = ({battery, id}) => {
                 message: `${battery.label} - Low Voltage!`
             });
         }
-        if (battery.value > BATTERY_THRESHOLD && alreadyNotified) {
+        if (battery.value >= BATTERY_THRESHOLD && alreadyNotified) {
             removeNotification(id);
         }
     }, [battery, id, notifications, addNotification, removeNotification ]);
