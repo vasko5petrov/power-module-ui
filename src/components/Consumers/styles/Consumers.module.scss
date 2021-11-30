@@ -1,0 +1,15 @@
+@import "~styles/main.scss";
+
+.container {
+    background-color: $dark-gray-100;
+    padding: 0 20px 20px;
+    h3 {
+        margin: 0 0 14px;
+    }
+}
+
+.containerFlex {
+    @extend %flex-container-row;
+    @extend %flex-space-around;
+    margin-bottom: 20px;
+}

@@ -1,0 +1,7 @@
+@import "~styles/main.scss";
+
+.container {
+    @extend %default-box;
+    @extend %flex-container-row;
+    @extend %flex-space-around;
+}

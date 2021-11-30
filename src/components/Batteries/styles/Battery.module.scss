@@ -1,0 +1,18 @@
+@import "~styles/main.scss";
+
+.container {
+    @extend %default-box;
+    @extend %flex-container-column;
+    @extend %flex-space-around;
+    font-size: 45px;
+    flex: 1;
+    margin: 0 15px;
+
+    &.warning {
+        border-color: $orange;
+    }
+
+    p {
+        font-size: 14px;
+    }
+}

@@ -1,0 +1,71 @@
+@import "./colors.scss";
+
+%flex-container-column {
+    display: flex;
+    flex-direction: column;
+}
+
+%flex-container-row {
+    display: flex;
+    flex-direction: row;
+}
+
+%flex-space-around {
+    justify-content: space-around;
+    align-items: center;
+}
+
+%default-button {
+    padding: 6px 13px;
+    text-transform: uppercase;
+    border: 1px solid $item-border-color;
+    background-color: $item-background-color;
+    border-radius: 3px;
+    display: block;
+    color: $text-color;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all .3s ease;
+    font-family: "Montserrat", "Arial", sans-serif;
+
+    @media (hover: hover) {
+        &:hover {
+            background-color: $item-border-color;
+        }
+    }
+}
+
+%default-button-disconnect {
+    @extend %default-button;
+    border-color: $red-100;
+    background-color: $red-100;
+    color: $white;
+
+    @media (hover: hover) {
+        &:hover {
+            background-color: $red !important;
+        }
+    }
+}
+
+%default-button-connect {
+    @extend %default-button;
+    border-color: $green;
+    background-color: $green;
+    color: $white;
+
+    @media (hover: hover) {
+        &:hover {
+            background-color: $green !important;
+        }
+    }
+}
+
+%default-box {
+    border-radius: 3px;
+    padding: 20px 30px;
+    background-color: $item-background-color;
+    border: 1px solid transparent;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .1);
+}

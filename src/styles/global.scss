@@ -1,0 +1,39 @@
+@import "./main.scss";
+@import "./colors.scss";
+
+@font-face {
+    font-family: "Montserrat";
+    src: url("~assets/fonts/Montserrat-Light.ttf");
+    font-weight: 100;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Montserrat";
+    src: url("~assets/fonts/Montserrat-Medium.ttf");
+    font-weight: 500;
+    font-style: normal;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: $background-color;
+    color: $text-color;
+    font-family: "Montserrat", "Arial", sans-serif;
+    font-weight: 100;
+}
+
+input, button, textarea {
+    color: $text-color;
+    font-family: "Montserrat", "Arial", sans-serif;
+    font-weight: 100;
+}
+
+a {
+    text-decoration: none;
+}

@@ -1,0 +1,47 @@
+@import "~styles/main.scss";
+
+.container {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 300px;
+    z-index: 99;
+}
+
+.notificationItem {
+    @extend %default-box;
+    width: 300px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 10px;
+    padding: 12px;
+    padding-right: 25px;
+    animation: show .4s forwards;
+
+    &.battery {
+        background-color: $orange;
+        border: 1px solid $orange;
+        color: $black;
+    }
+
+    &.consumer {
+        background-color: $red;
+        border: 1px solid $red;
+        color: $white;
+    }
+
+    p {
+        font-size: 14px;
+        line-height: 20px;
+        font-weight: 500;
+    }
+}
+
+@keyframes show {
+    0% {
+        transform: translateX(120%);
+    }
+    100% {
+        transform: translateX(0%);
+    }
+}

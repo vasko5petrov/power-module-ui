@@ -1,0 +1,10 @@
+@import "~styles/main.scss";
+
+.button {
+    &.disconnect {
+        @extend %default-button-disconnect;
+    }
+    &.connect {
+        @extend %default-button-connect;
+    }
+}
