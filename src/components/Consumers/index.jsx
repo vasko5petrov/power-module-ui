@@ -12,7 +12,7 @@ const Batteries = () => {
 
     return (
         <div className={style.container}>
-            <h3>Batteries</h3>
+            <h3>Consumers</h3>
             <div className={style.containerFlex}>
                 {Object.entries(consumers).map(([key, consumer]) => (
                     <Consumer key={key} id={key} consumer={consumer} />
