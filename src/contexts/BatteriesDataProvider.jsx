@@ -1,5 +1,7 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useCallback, useState } from 'react';
 import { fetchBatteriesData } from 'fakeApi';
+import { useNotifications } from 'contexts/NotificationsProvider';
+import { BATTERY_THRESHOLD } from 'utils/enums';
 
 const BatteriesDataContext = React.createContext();
 
@@ -18,6 +20,7 @@ export const BatteriesDataProvider = ({ children }) => {
             value: 21
         }
     });
+    const { notifications, addNotification, removeNotification } = useNotifications();
 
     const updateBatteryValue = (key, value) => setBatteries((prevBatteriesState) => ({
         ...prevBatteriesState,
@@ -27,9 +30,9 @@ export const BatteriesDataProvider = ({ children }) => {
         }
     }));
 
-    const populateBatteryValues = (data) => {
+    const populateBatteryValues = useCallback((data) => {
         Object.entries(data).map(([key, battery]) => updateBatteryValue(key, battery.value));
-    };
+    }, []);
     
     useEffect(() => {
         const intervalId = setInterval(async () => {
@@ -43,7 +46,25 @@ export const BatteriesDataProvider = ({ children }) => {
         return () => {
             clearInterval(intervalId);
         }
-    }, []);
+    }, [populateBatteryValues]);
+    
+
+    useEffect(() => {
+        Object.entries(batteries).map(([id, battery]) => {
+            const alreadyNotified = notifications.some((notification) => notification.id === id);
+            if (battery.value < BATTERY_THRESHOLD && !alreadyNotified) {
+                addNotification({
+                    id,
+                    type: 'BATTERY',
+                    message: `${battery.label} - Low Voltage!`
+                });
+            }
+            if (battery.value >= BATTERY_THRESHOLD && alreadyNotified) {
+                removeNotification(id);
+            }
+            return null;
+        });
+    }, [batteries, notifications, addNotification, removeNotification ]);
 
     return (
         <BatteriesDataContext.Provider value={{batteries}}>
