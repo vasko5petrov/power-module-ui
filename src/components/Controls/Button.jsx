@@ -21,6 +21,7 @@ const Button = ({consumer, id, consumerSimulation, handleOnClick}) => {
                 [style.disconnect]: !consumer.disconnected,
                 [style.connect]: consumer.disconnected
             })}
+            data-testid={`${id}-button`}
         >{`${labelPrefix} ${consumer.label}`} </button>
     );
 }
