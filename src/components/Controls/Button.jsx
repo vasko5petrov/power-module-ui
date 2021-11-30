@@ -1,27 +1,33 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import classnames from 'classnames';
+import * as consumerActions from 'store/actions/consumers';
 import style from './styles/Button.module.scss';
 
-const Button = ({consumer, id, consumerSimulation, handleOnClick}) => {
+const Button = ({consumer, id, consumerSimulation}) => {
+    const dispatch = useDispatch();
+	const { toggleConsumer } = bindActionCreators(consumerActions, dispatch);
+
     const toggleConsumerAndSimulation = () => {
-        if (consumer.disconnected) {
+        if (consumer.get('disconnected')) {
             consumerSimulation.start();
         } else {
             consumerSimulation.clear();
         }
-        handleOnClick(id);
+        toggleConsumer(id)
     }
 
-    const labelPrefix = consumer.disconnected ? 'Connect' : 'Disconnect';
-
     return (
-        <button
-            onClick={toggleConsumerAndSimulation}
-            className={classnames(style.button, {
-                [style.disconnect]: !consumer.disconnected,
-                [style.connect]: consumer.disconnected
-            })}
-        >{`${labelPrefix} ${consumer.label}`} </button>
+        <button onClick={toggleConsumerAndSimulation} className={classnames(style.button, {
+            [style.disconnect]: !consumer.get('disconnected'),
+            [style.connect]: consumer.get('disconnected')
+        })}>
+            {consumer.get('disconnected')
+                ? `Connect ${consumer.get('label')}`
+                : `Disconnect ${consumer.get('label')}`
+            }
+        </button>
     );
 }
 
